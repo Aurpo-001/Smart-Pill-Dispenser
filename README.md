@@ -1,6 +1,6 @@
 # Smart Pill Dispenser
 
-An Arduino-based medication reminder and access-control prototype that schedules three daily doses, unlocks a servo-controlled lid at medicine time, and warns when the enclosure is opened unexpectedly.
+An Arduino-based medication reminder and access-monitoring prototype that schedules three daily doses and warns when the enclosure is opened unexpectedly. This repository pairs the documented alert-only classroom build with enhanced firmware that also supports an optional servo-controlled lid.
 
 <p align="center">
   <img src="docs/media/prototype-clock.jpeg" alt="Smart Pill Dispenser showing the clock and configured alarms" width="46%">
@@ -15,7 +15,7 @@ An Arduino-based medication reminder and access-control prototype that schedules
 
 - Keeps time with a DS3231 real-time clock (RTC).
 - Supports three configurable daily reminder times.
-- Unlocks the lid with a servo when a reminder becomes due.
+- Supports optional servo unlocking when a reminder becomes due.
 - Uses a lid switch to distinguish a scheduled opening from forced entry.
 - Provides clear LCD, LED, and buzzer feedback.
 - Automatically completes a reminder after the lid has been opened and closed.
@@ -34,6 +34,29 @@ flowchart LR
     MCU --> LEDs["Status LEDs"]
 ```
 
+## Project report and design artifacts
+
+The complete CSE360 report, **Smart Medicine Reminder Box with Unauthorized Access Safety**, is available here:
+
+- [Read the project report (PDF)](docs/report/Smart_Medicine_Reminder_Box_Project_Report.pdf)
+
+The report documents the original classroom prototype, including its I²C/GPIO architecture, alert logic, cost breakdown, measured response time, limitations, and proposed improvements.
+
+### System block diagram
+
+![System block diagram showing the Arduino, RTC, LCD, buttons, lid switch, LEDs, and buzzer](docs/media/report/system-block-diagram.jpg)
+
+### Process flowchart
+
+![Process flowchart for scheduled access and forced-entry detection](docs/media/report/process-flowchart.jpg)
+
+### Circuit schematic
+
+![Arduino Uno circuit schematic from the project report](docs/media/report/circuit-schematic.jpg)
+
+> [!NOTE]
+> The report records that the demonstrated classroom build used buzzer/LED tamper detection and did **not** complete the physical servo lock. The firmware in this repository is an enhanced follow-up that adds optional servo locking on D9 while retaining the documented alert-based behaviour. The servo can be omitted if reproducing the reported prototype exactly.
+
 ## Operating states
 
 | State | LCD / indicators | Behaviour |
@@ -51,7 +74,7 @@ flowchart LR
 | Arduino-compatible board | Runs the controller firmware |
 | DS3231 RTC module | Maintains date and time |
 | 16×2 I²C LCD (`0x27`) | Displays time, alarms, and warnings |
-| Hobby servo | Locks and unlocks the lid |
+| Hobby servo (optional enhancement) | Locks and unlocks the lid |
 | Lid switch | Detects open/closed state |
 | Active or passive buzzer | Audible reminder and tamper alert |
 | Green and red LEDs | Visual status indicators |
@@ -91,6 +114,9 @@ Alarm changes are stored in RAM and return to the defaults after a power cycle. 
 │       └── smart_pill_dispenser.ino
 ├── docs/
 │   ├── media/
+│   │   └── report/
+│   ├── report/
+│   │   └── Smart_Medicine_Reminder_Box_Project_Report.pdf
 │   ├── HARDWARE.md
 │   ├── SAFETY.md
 │   └── USER_GUIDE.md

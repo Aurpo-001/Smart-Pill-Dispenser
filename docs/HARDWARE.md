@@ -1,5 +1,11 @@
 # Hardware and wiring
 
+## Documented prototype and enhanced firmware
+
+The original CSE360 prototype documented in the report uses the Arduino Uno, DS3231 RTC, 16x2 I²C LCD, three control buttons, lid limit switch, buzzer, and status LEDs. Its security response is alert-based; the physical servo lock was listed as unfinished.
+
+The repository firmware adds **optional** servo control on D9 as a follow-up improvement. Leave the servo disconnected if you want to reproduce the report build exactly. The original diagrams are available in the repository's [`docs/media/report`](media/report) directory, and the full report is in [`docs/report`](report).
+
 ## Pin map
 
 The firmware uses the following Arduino Uno-compatible pin assignment.
