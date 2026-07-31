@@ -1,0 +1,10 @@
+cff-version: 1.2.0
+message: "If you use this educational prototype, please cite the repository."
+title: "Smart Pill Dispenser"
+type: software
+authors:
+  - name: "Aurpo"
+repository-code: "https://github.com/Aurpo-001/Smart-Pill-Dispenser"
+license: MIT
+version: 1.0.0
+date-released: 2026-07-31
